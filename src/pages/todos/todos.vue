@@ -7,24 +7,8 @@
             @blur="addTodo"></edit-todo>
         <button @click="reset">一键清空</button>
         <ul>
-            <li
-                v-for="item in filterTodos"
-                :key="item.id" 
-                :class="{ complete: item.complete, editing: item == editTodo }"
-            >
-                <div class="normal">
-                    <input type="checkbox" v-model="item.complete" />
-                    <label @dblclick="edit(item)">{{ item.title }}</label>
-                </div>
-                <edit-todo
-                    v-auto-focus="item == editTodo"
-                    class="edit-input"
-                    v-model:todo-title="item.title"
-                    @blur="done"
-                    @keyup.enter="done"
-                    @keyup.esc="cancel(item)"
-                ></edit-todo>
-            </li>
+            <todo-item v-for="item in filterTodos"
+                :key="item.id" :item="item" v-model:editTodo="editTodo"></todo-item>
         </ul>
         <div>
             <div @click="filterStatus = 'all'">all</div>
@@ -36,6 +20,7 @@
 
 <script>
 import { reactive, toRefs, computed, watchEffect } from 'vue'
+import TodoItem from './todoItem.vue'
 
 const filter = {
     all(todos) {
@@ -70,6 +55,9 @@ const todoStroage = {
 // 5、使用localstroage保存数据，并且用watch监听
 
 export default {
+    components: {
+        TodoItem
+    },
     setup() {
         const state = reactive({
             newTodo: '',
@@ -91,18 +79,6 @@ export default {
                 state.newTodo = ''
             }
         }
-        function edit(todo) {
-            state.editTodo = todo
-            state.editBak = todo.title
-        }
-        function done() {
-            state.editTodo = null
-        }
-        function cancel(todo) {
-            todo.title = state.editBak
-            state.editBak = ''
-            state.editTodo = null
-        }
         function reset() {
             state.todos = []
             todoStroage.save([])
@@ -114,33 +90,11 @@ export default {
         return {
             ...toRefs(state),
             addTodo,
-            edit,
-            done,
-            cancel,
             reset
-        }
-    },
-    directives: {
-        'auto-focus': (el, binding) => {
-            if (binding.value) {
-                el.focus()
-            }
         }
     }
 }
 </script>
 
 <style scoped>
-.complete label {
-    text-decoration: line-through;
-}
-
-.normal,
-.editing .edit-input {
-    display: block;
-}
-.edit-input,
-.editing .normal {
-    display: none;
-}
 </style>
