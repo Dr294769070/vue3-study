@@ -23,6 +23,7 @@
                             <i class="el-icon-location"></i>
                             <span>文件列表</span>
                         </template>
+                        <!-- <router-view to="/editTodo"></router-view> -->
                         <el-menu-item index="1-1">图片</el-menu-item>
                     </el-submenu>
                     <el-menu-item index="2">

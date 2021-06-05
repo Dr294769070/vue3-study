@@ -7,7 +7,10 @@ import './index.css'
 import EditTodo from './pages/todos/editTodo.vue'
 import UploadFile from './components/upload-file/index.vue'
 
+import {router} from './route/index.js'
+
 createApp(App).
+    use(router).
     use(ElementPlus).
     component('EditTodo', EditTodo).
     component('UploadFile', UploadFile).

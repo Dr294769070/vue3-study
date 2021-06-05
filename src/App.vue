@@ -2,7 +2,8 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
     <!-- <HelloWorld msg="Hello Vue 3.0 + Vite" /> -->
     <!-- <todos></todos> -->
-    <Homepage></Homepage>
+    <!-- <Homepage></Homepage> -->
+    <router-view></router-view>
 </template>
 
 <script>
