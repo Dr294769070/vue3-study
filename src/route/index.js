@@ -1,8 +1,9 @@
 import { h } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
 export const router = createRouter({
     history: createWebHashHistory(),
+    // history: createWebHistory('/base'), // base参数
     routes: [
         {
             path: '/',
@@ -13,8 +14,20 @@ export const router = createRouter({
             path: '/editTodo',
             name: '记事本',
             component: () => import('../pages/todos/editTodo.vue')
+        },
+        {
+            path: '/:pathMatch(.*)*', // 将未匹配的路径名称导航到该路径
+            name: '404',
+            component: {
+                render() {
+                    return h('div', '404')
+                }
+            }
         }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        return savedPosition || { top: 0, left: 0}
+    }
 })
 
 // 动态添加路由

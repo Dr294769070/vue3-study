@@ -3,9 +3,16 @@
         about page
         <nav-link to="/"></nav-link>
         <nav-link to="/about"></nav-link>
+        <router-link to="/editTodo" custom v-slot="scope">
+            <div @dblclick="scope.navigate">{{ scope.route.name }}</div>
+        </router-link>
         <nav-link to="/editTodo"></nav-link>
     </div>
-    <router-view></router-view>
+    <router-view v-slot={Component}>
+        <keep-alive>
+            <component :is="Component"></component>
+        </keep-alive>
+    </router-view>
 </template>
 
 <script>
@@ -21,10 +28,10 @@ import navLink from './navLink.vue'
                 console.log('val', val)
             })
             // 路由守卫 只在离开当前about页面时生效
-            onBeforeRouteLeave((to, from) => {
-                const answer = window.confirm('确定离开？') 
-                if (!answer) return false
-            })
+            // onBeforeRouteLeave((to, from) => {
+            //     const answer = window.confirm('确定离开？') 
+            //     if (!answer) return false
+            // })
             return {}
         }
     }
