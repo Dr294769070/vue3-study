@@ -6,9 +6,16 @@ export const router = createRouter({
     // history: createWebHistory('/base'), // base参数
     routes: [
         {
-            path: '/',
+            path: '/home',
             name: '首页',
-            component: () => import('../pages/Homepage/index.vue')
+            component: () => import('../pages/Homepage/index.vue'),
+            children: [
+                {
+                    path: '/home/uploadPage',
+                    name: '上传文件',
+                    component: () => import('../pages/UploadPage/index.vue')
+                },
+            ]
         },
         {
             path: '/editTodo',

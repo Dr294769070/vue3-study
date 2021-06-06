@@ -8,20 +8,27 @@
             </el-radio-group>
         </div>
         <div class="upload-content">
-            <UploadFile @success="handleSuccess"></UploadFile>
+            <UploadFile :fileType="fileType" @success="handleSuccess"></UploadFile>
         </div>
     </div>
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, computed, watch } from 'vue'
 
 
 export default {
     setup() {
         const state = reactive({
-            radio: 0
+            radio: 0,
+            fileType: computed(() => {
+                console.log('change', state.radio == 0 ? 'image' : 'video')
+                return state.radio == 0 ? 'image' : 'video'
+            })
         })
+        // watch(() => state.radio, (newVal) => {
+        //     console.log('newVal', newVal)
+        // })
         return {
             ...toRefs(state)
         }

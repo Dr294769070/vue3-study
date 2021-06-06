@@ -9,6 +9,7 @@
                 type="file"
                 class="file-input"
                 @change="handleChange"
+                :accept="accept"
             />
         </div>
         <el-progress :percentage="percentage" v-if="showProgress" :format="format"></el-progress>
@@ -17,14 +18,20 @@
 </template>
 
 <script>
-import { reactive, toRefs, ref } from 'vue'
+import { reactive, toRefs, ref, computed } from 'vue'
 import { putObject } from '../../utils/cos'
 
 export default {
+    props: {
+        fileType: String // 使用props必须在这里指定
+    },
     setup(props, context) {
         const state = reactive({
             showProgress: false,
-            percentage: 0
+            percentage: 0,
+            accept: computed(() => {
+                return props.fileType == 'video' ? 'video/*' : 'image/*';
+            })
         })
         const fileInput = ref()
         const completeCb = (data) => {

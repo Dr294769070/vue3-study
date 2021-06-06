@@ -8,6 +8,11 @@
         </router-link>
         <nav-link to="/editTodo"></nav-link>
     </div>
+    <div>
+        <p @click="add">{{$store.state.count}}</p>
+        <p>{{count}}</p>
+        <!-- <p>{{ state.count }}</p> -->
+    </div>
     <router-view v-slot={Component}>
         <keep-alive>
             <component :is="Component"></component>
@@ -16,8 +21,9 @@
 </template>
 
 <script>
-import { watch } from 'vue'
+import { toRefs, watch } from 'vue'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import navLink from './navLink.vue'
     export default {
     components: { navLink },
@@ -32,7 +38,16 @@ import navLink from './navLink.vue'
             //     const answer = window.confirm('确定离开？') 
             //     if (!answer) return false
             // })
-            return {}
+
+            const store = useStore()
+            function add() {
+                store.commit('add')
+            }
+            return {
+                add,
+                // state: store.state, // 这个时候 文本插值为state.count
+                ...toRefs(store.state) // 将数据转为响应式，然后结构  文本插值使用的时候，直接使用count即可
+            }
         }
     }
 </script>
