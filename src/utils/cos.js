@@ -24,3 +24,22 @@ export function putObject(Key, fileObject, completeCb, progressCb,) { // 上传�
         completeCb && completeCb(data)
     });
 }
+
+export function getBucketObj(Prefix) {
+    return new Promise((resolve, reject) => {
+        const params = {
+            Bucket,
+            Region,
+            Delimiter: '/'
+        } // , Delimiter: '/'
+        if (Prefix) params.Prefix = Prefix
+        cos.getBucket(params, function (err, data) {
+                console.log('getBucketObj', err || data.Contents);
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+        });
+    })
+}

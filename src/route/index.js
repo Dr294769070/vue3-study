@@ -15,6 +15,11 @@ export const router = createRouter({
                     name: '上传文件',
                     component: () => import('../pages/UploadPage/index.vue')
                 },
+                {
+                    path: '/home/fileList',
+                    name: '文件列表',
+                    component: () => import('../pages/fileList/index.vue')
+                }
             ]
         },
         {

@@ -12,8 +12,8 @@
                             <i class="el-icon-location"></i>
                             <span>文件列表</span>
                         </template>
-                        <router-link custom v-slot="scope" to="/editTodo">
-                            <el-menu-item index="1-1" @click="scope.navigate">图片</el-menu-item>
+                        <router-link custom v-slot="scope" to="/home/fileList">
+                            <el-menu-item index="1-1" @click="scope.navigate">文件</el-menu-item>
                         </router-link>
                     </el-submenu>
                     <router-link custom v-slot="scope" to="/home/uploadPage">
