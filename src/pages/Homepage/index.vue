@@ -75,8 +75,11 @@ export default {
     }
     .app-right-content {
         height: 100%;
-        padding-left: 200px;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 200px;
+        right: 0;
+        overflow: auto;
     }
 }
 </style>

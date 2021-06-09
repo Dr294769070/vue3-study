@@ -19,6 +19,11 @@ export const router = createRouter({
                     path: '/home/fileList',
                     name: '文件列表',
                     component: () => import('../pages/fileList/index.vue')
+                },
+                {
+                    path: '/home/detail',
+                    name: '文件详情',
+                    component: () => import('../pages/detail/index.vue')
                 }
             ]
         },

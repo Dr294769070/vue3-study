@@ -31,15 +31,32 @@ export function getBucketObj(Prefix) {
             Bucket,
             Region,
             Delimiter: '/'
-        } // , Delimiter: '/'
+        }
         if (Prefix) params.Prefix = Prefix
         cos.getBucket(params, function (err, data) {
-                console.log('getBucketObj', err || data.Contents);
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(data)
-                }
+            console.log('getBucketObj', err || data.Contents);
+            if (err) {
+                reject(err)
+            } else {
+                resolve(data)
+            }
         });
+    })
+}
+
+export function getObject(options = {}) {
+    return new Promise((resolve, reject) => {
+        const params = Object.assign({
+            Bucket,
+            Region,
+        }, options)
+        cos.getObject(params, function (err, data) {
+            console.log('getObject', err || data);
+            if (err) {
+                reject(err)
+            } else {
+                resolve(data)
+            }
+        })
     })
 }

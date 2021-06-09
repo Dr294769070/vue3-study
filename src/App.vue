@@ -26,23 +26,25 @@ export default {
     margin: 0;
     padding: 0;
 }
-.app-container {
-    height: 100%;
-    .app-left-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background: #303133;
-        .user-detail{
-            display: flex;
-            align-items: center;
-            height: 100px;
-        }
-    }
-    .app-right-content {
-        padding-left: 200px;
-    }
-}
+// .app-container {
+//     height: 100%;
+//     .app-left-container {
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 200px;
+//         height: 100%;
+//         background: #303133;
+//         .user-detail{
+//             display: flex;
+//             align-items: center;
+//             height: 100px;
+//         }
+//     }
+//     .app-right-content {
+//         position: absolute;
+//         top: 0;
+//         left: 200px;
+//     }
+// }
 </style>
